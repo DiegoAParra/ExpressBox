@@ -1,0 +1,88 @@
+﻿@model PackageDelivery.GUI.Models.Parameters.AddressModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Direccion</h2>
+
+<h3>Estas seguro de querer eliminar esta direccion?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Current)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Current)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StreetType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StreetType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PropertyType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PropertyType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Neighborhood)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Neighborhood)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observations)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observations)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CityName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default btn-danger" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

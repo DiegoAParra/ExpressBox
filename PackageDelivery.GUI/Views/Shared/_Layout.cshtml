@@ -1,0 +1,85 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ExpressBox</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+<body>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <nav class="navbar navbar-light navbar-dark bg-dark">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Principales
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("Paquetes", "Index", "Package", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Envíos", "Index", "Delivery", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Historial Paquetes", "Index", "PackageHistory", new { area = "" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownSecondary" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Entidades Secundarias
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownSecondary">
+                            @Html.ActionLink("Departamentos", "Index", "Department", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Municipios", "Index", "City", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Tipos Documento", "Index", "DocumentType", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Personas", "Index", "Person", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Oficinas", "Index", "Office", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Bodegas", "Index", "Warehouse", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Direcciones", "Index", "Address", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Estados envío", "Index", "DeliveryStatus", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Tipos Transporte", "Index", "TransportType", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Vehiculos", "Index", "Vehicle", new { area = "" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                    @Html.ActionLink("Rutas", "Route", "Home", new { area = "" }, new { @class = "nav-link" })
+                 }
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+        @Html.ActionLink("ExpressBox", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - ExpressBox. Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

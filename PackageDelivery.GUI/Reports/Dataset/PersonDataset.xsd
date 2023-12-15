@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PersonDataset1" targetNamespace="http://tempuri.org/PersonDataset1.xsd" xmlns:mstns="http://tempuri.org/PersonDataset1.xsd" xmlns="http://tempuri.org/PersonDataset1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PersonDataset1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="PersonDataset1" msprop:Generator_DataSetName="PersonDataset1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Person" msprop:Generator_RowEvHandlerName="PersonRowChangeEventHandler" msprop:Generator_RowDeletedName="PersonRowDeleted" msprop:Generator_RowDeletingName="PersonRowDeleting" msprop:Generator_RowEvArgName="PersonRowChangeEvent" msprop:Generator_TablePropName="Person" msprop:Generator_RowChangedName="PersonRowChanged" msprop:Generator_RowChangingName="PersonRowChanging" msprop:Generator_TableClassName="PersonDataTable" msprop:Generator_RowClassName="PersonRow" msprop:Generator_TableVarName="tablePerson" msprop:Generator_UserTableName="Person">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_UserColumnName="Id" type="xs:string" />
+              <xs:element name="FirstName" msprop:Generator_ColumnPropNameInRow="FirstName" msprop:Generator_ColumnPropNameInTable="FirstNameColumn" msprop:Generator_ColumnVarNameInTable="columnFirstName" msprop:Generator_UserColumnName="FirstName" type="xs:string" minOccurs="0" />
+              <xs:element name="FirstLastName" msprop:Generator_ColumnPropNameInRow="FirstLastName" msprop:Generator_ColumnPropNameInTable="FirstLastNameColumn" msprop:Generator_ColumnVarNameInTable="columnFirstLastName" msprop:Generator_UserColumnName="FirstLastName" type="xs:string" minOccurs="0" />
+              <xs:element name="IdentificationNumber" msprop:Generator_ColumnPropNameInRow="IdentificationNumber" msprop:Generator_ColumnPropNameInTable="IdentificationNumberColumn" msprop:Generator_ColumnVarNameInTable="columnIdentificationNumber" msprop:Generator_UserColumnName="IdentificationNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="CellPhone" msprop:Generator_ColumnPropNameInRow="CellPhone" msprop:Generator_ColumnPropNameInTable="CellPhoneColumn" msprop:Generator_ColumnVarNameInTable="columnCellPhone" msprop:Generator_UserColumnName="CellPhone" type="xs:string" minOccurs="0" />
+              <xs:element name="Email" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_UserColumnName="Email" type="xs:string" minOccurs="0" />
+              <xs:element name="DocumentTypeName" msprop:Generator_ColumnPropNameInRow="DocumentTypeName" msprop:Generator_ColumnPropNameInTable="DocumentTypeNameColumn" msprop:Generator_ColumnVarNameInTable="columnDocumentTypeName" msprop:Generator_UserColumnName="DocumentTypeName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Person" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

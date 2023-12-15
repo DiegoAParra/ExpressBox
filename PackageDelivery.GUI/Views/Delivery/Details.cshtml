@@ -1,0 +1,74 @@
+﻿@model PackageDelivery.GUI.Models.Core.DeliveryModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles Envio</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DestinationAddressName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DestinationAddressName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Package)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Package)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryStatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryStatusName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SenderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SenderName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransportTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransportTypeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @Class = "btn btn-warning" }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

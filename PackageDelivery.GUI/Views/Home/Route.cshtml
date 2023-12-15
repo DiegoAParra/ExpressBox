@@ -1,0 +1,250 @@
+﻿@model Tuple<IEnumerable<PackageDelivery.GUI.Models.Parameters.WarehouseModel>, IEnumerable<PackageDelivery.GUI.Models.Core.RouteModel>>
+
+@{
+    ViewBag.Title = "Rutas";
+}
+
+<div class="text-center">
+    <h2>Consulta tu Ruta</h2>
+</div>
+
+<hr class="my-2"> <!-- Línea divisoria -->
+
+<form id="myForm" method="post" action="@Url.Action("Route", "Home")" class="form-inline">
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            @Html.Label("Bodega:")
+            @Html.DropDownList("IdWarehouse", new SelectList(Model.Item1, "Id", "Name"), new { @class = "form-control", id = "selectWarehouse" })
+        </div>
+
+        <div class="form-group col-md-5">
+            @Html.Label("Fecha Entrega:")
+            <input type="date" id="selectedDate" name="selectedDate" class="form-control" />
+        </div>
+    </div>
+
+    <div id="selectedWarehouseAndDateMessage" class="alert" style="display: none;">
+        <strong>Bodega:</strong> <span id="selectedWarehouse"></span><br />
+        <strong>Fecha Entrega:</strong> <span id="selectedDateText"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary ml-md-auto">Enviar</button>
+</form>
+
+<hr class="my-2"> <!-- Línea divisoria -->
+
+@section scripts {
+    <script>
+        // Captura el evento de cambio del DropDownList
+        $(document).ready(function () {
+            $("#selectWarehouse, #selectedDate").change(function () {
+                // Obtiene el texto de la bodega seleccionada
+                var selectedWarehouse = $("#selectWarehouse").find("option:selected").text();
+
+                // Obtiene la fecha seleccionada
+                var selectedDate = $("#selectedDate").val();
+
+                // Muestra el mensaje con la bodega y la fecha seleccionados
+                $("#selectedWarehouse").text(selectedWarehouse);
+                $("#selectedDateText").text(selectedDate);
+                $("#selectedWarehouseAndDateMessage").show();
+            });
+
+            // Agrega un manejador de eventos al formulario para enviar los datos al controlador
+            $("#myForm").submit(function (event) { });
+        });
+    </script>
+}
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item2.First().Id_Package)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item2.First().Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item2.First().DestinationAddress)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Item2)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Package)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestinationAddress)
+            </td>
+        </tr>
+    }
+</table>
+
+<div id="map"></div>
+
+<style>
+    #map {
+        height: 380px;
+    }
+</style>
+
+<script>
+    var map = L.map('map').setView([0, 0], 14);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+</script>
+
+@{
+    var listElements = Model.Item2.ToList();
+}
+
+<script>
+    var claveAPI = 'AIzaSyBtsy4zQaQe8frwv0gZaqvG8AokhWYLERc';
+    var coordenadas = [];
+
+    function geocodeAndAddToList(item) {
+        return new Promise((resolve, reject) => {
+            var direccion = item.DestinationAddress;
+            var url = `https://maps.googleapis.com/maps/api/geocode/json?address=${direccion}&key=${claveAPI}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'OK') {
+                        var latitud = data.results[0].geometry.location.lat;
+                        var longitud = data.results[0].geometry.location.lng;
+
+                        coordenadas.push({ latitud: latitud, longitud: longitud });
+
+                        var marker = L.marker([latitud, longitud]).addTo(map);
+                        marker.bindPopup("<b>" + item.Description + "</b><br>" + item.DestinationAddress).openPopup();
+
+                        resolve();  // Resolvemos la promesa después de la geocodificación
+                    } else {
+                        alert('Dirección no encontrada ' + direccion);
+                        reject('Error en la geocodificación');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                    reject(error);
+                });
+        });
+    }
+
+    // Promesa para ejecutar geocodificación de forma secuencial
+    function geocodeSequentially(items) {
+        return items.reduce((promise, item) => {
+            return promise.then(() => geocodeAndAddToList(item));
+        }, Promise.resolve());
+    }
+
+    // Llamada a la función que realiza la geocodificación de forma secuencial
+    geocodeSequentially(@Html.Raw(Json.Encode(listElements)))
+        .then(() => {
+            // Muestra las coordenadas en el label
+            var coordenadasLabel = document.getElementById('coordenadasLabel');
+            if (coordenadas.length > 0) {
+                // Calcula la distancia entre dos puntos (coordenadas)
+                function calcularDistancia(coord1, coord2) {
+                    var lat1 = coord1.latitud;
+                    var lon1 = coord1.longitud;
+                    var lat2 = coord2.latitud;
+                    var lon2 = coord2.longitud;
+
+                    var radlat1 = Math.PI * lat1 / 180;
+                    var radlat2 = Math.PI * lat2 / 180;
+                    var theta = lon1 - lon2;
+                    var radtheta = Math.PI * theta / 180;
+
+                    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                    dist = Math.acos(dist);
+                    dist = dist * 180 / Math.PI;
+                    dist = dist * 60 * 1.1515;  // Distancia en millas (puedes ajustar esto según tus necesidades)
+                    dist = dist * 1.609344;    // Convertir a kilómetros
+
+                    return dist;
+                }
+
+                // Encuentra la coordenada más cercana a la coordenada actual en la lista no visitada
+                function encontrarVecinoMasCercano(coordenadaActual, coordenadasNoVisitadas) {
+                    var distanciaMinima = Infinity;
+                    var vecinoMasCercano = null;
+
+                    for (var i = 0; i < coordenadasNoVisitadas.length; i++) {
+                        var distancia = calcularDistancia(coordenadaActual, coordenadasNoVisitadas[i]);
+                        if (distancia < distanciaMinima) {
+                            distanciaMinima = distancia;
+                            vecinoMasCercano = coordenadasNoVisitadas[i];
+                        }
+                    }
+
+                    return vecinoMasCercano;
+                }
+
+                // Calcula el camino óptimo utilizando el algoritmo del vecino más cercano
+                function calcularCaminoOptimo(coordenadas) {
+                    var coordenadasNoVisitadas = coordenadas.slice();  // Copiar la lista de coordenadas
+                    var caminoOptimo = [];
+
+                    // Seleccionar el punto de inicio (puedes cambiar esto según tus necesidades)
+                    var puntoInicio = coordenadasNoVisitadas.shift();
+                    caminoOptimo.push(puntoInicio);
+
+                    while (coordenadasNoVisitadas.length > 0) {
+                        var coordenadaActual = caminoOptimo[caminoOptimo.length - 1];
+                        var vecinoMasCercano = encontrarVecinoMasCercano(coordenadaActual, coordenadasNoVisitadas);
+
+                        caminoOptimo.push(vecinoMasCercano);
+                        coordenadasNoVisitadas = coordenadasNoVisitadas.filter(coord => coord !== vecinoMasCercano);
+                    }
+
+                    return caminoOptimo;
+                }
+
+                var caminoOptimo = calcularCaminoOptimo(coordenadas);
+
+                caminoOptimo.forEach(function (optimo, index) {
+                    if (index < caminoOptimo.length - 1) {
+                        // Configuración de opciones para L.Routing.control
+                        var routingOptions = {
+                            waypoints: [
+                                L.latLng(caminoOptimo[index].latitud, caminoOptimo[index].longitud),
+                                L.latLng(caminoOptimo[index + 1].latitud, caminoOptimo[index + 1].longitud)
+                            ],
+                            routeWhileDragging: false,  // Evitar que la ruta se actualice mientras se arrastra
+                            draggableWaypoints: false,  // Evitar que los puntos intermedios sean arrastrables
+                            show: false  // No mostrar la interfaz de usuario para la ruta
+                        };
+
+                        // Crear la instancia de L.Routing.control con las opciones configuradas
+                        var routingControl = L.Routing.control(routingOptions);
+
+                        // Añadir el control al mapa
+                        routingControl.addTo(map);
+
+                        // Crear un array de LatLng para la ruta
+                        var rutaCoords = [
+                            L.latLng(caminoOptimo[index].latitud, caminoOptimo[index].longitud),
+                            L.latLng(caminoOptimo[index + 1].latitud, caminoOptimo[index + 1].longitud)
+                        ];
+
+                        // Crear una polilínea y añadirla al mapa
+                        var rutaPolyline = L.polyline(rutaCoords, { color: 'blue' }).addTo(map);
+
+                    }
+                });
+            }
+        })
+        .catch(error => console.error(error));
+</script>
+
+

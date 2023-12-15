@@ -1,0 +1,82 @@
+﻿@model PackageDelivery.GUI.Models.Parameters.AddressModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles Direccion</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Current)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Current)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StreetType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StreetType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PropertyType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PropertyType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Neighborhood)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Neighborhood)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observations)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observations)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CityName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @Class = "btn btn-warning" }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

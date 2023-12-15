@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PackageDelivery.GUI.Models.Core.PackageHistoryModel>
+
+@{
+    ViewBag.Title = "Página de Inicio";
+}
+
+<div class="jumbotron text-center">
+    <h3 class="display-4">ExpressBox</h3>
+    <img src="https://s3.us-east-2.amazonaws.com/enviapaqueteria/uploads/landing/images/logistics/LTL.png" class="img-fluid mt-4 mb-4" alt="ExpressBox Logo">
+    <p class="lead">La mensajería y la entrega de paquetes son servicios en constante demanda. Con el crecimiento del comercio electrónico y las compras en línea, la necesidad de soluciones de mensajería eficientes y confiables se ha vuelto esencial y es por eso que se decide crear un software que sea capaz de mejorar la eficiencia en la recogida, clasificación, transporte y entrega de paquetes para reducir costos operativos y tiempos de tránsito proporcionando un servicio de alta calidad, garantizando la entrega oportuna y segura de paquetes, y minimizando daños o pérdidas.</p>
+    <hr class="my-4">
+
+    <div class="container mt-4 d-flex justify-content-center align-items-center">
+        <h5>Rastrea tu paquete</h5>
+        <form class="form-inline my-2 my-lg-0" onsubmit="return redirectToSearch()">
+            <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
+            <button type="submit" class="btn btn-info">Buscar</button>
+        </form>
+
+        <script>
+            function redirectToSearch() {
+                var searchValue = document.getElementById('searchInput').value;
+                window.location.href = '@Url.Action("Search", "Home")?id=' + searchValue;
+                return false;
+            }
+        </script>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="info-box">
+            <i class="fas fa-building fa-2x"></i>
+            <h4>Nosotros</h4>
+            <p>ExpressBox es una empresa de mensajería y paquetería que ofrece servicios de entrega de paquetes a nivel nacional. Nuestro objetivo es brindar un servicio de calidad, eficiente y seguro, que cumpla con las expectativas de nuestros clientes.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="info-box">
+            <i class="fas fa-map-marker-alt fa-2x"></i>
+            <h4>Contacto</h4>
+            <address>
+                <p>ExpressBox</p>
+                <p>Av. Tecnológico #123</p>
+                <p>Col. Centro</p>
+                <p>Querétaro, Qro.</p>
+                <p>Tel. 442 123 4567</p>
+            </address>
+        </div>
+    </div>
+</div>

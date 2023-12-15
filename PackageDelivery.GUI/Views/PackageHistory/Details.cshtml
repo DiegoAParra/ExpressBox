@@ -1,0 +1,58 @@
+﻿@model PackageDelivery.GUI.Models.Core.PackageHistoryModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles Historial Paquete</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AdmissionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdmissionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepurateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepurateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Package)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Package)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WarehouseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WarehouseName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @Class = "btn btn-warning" }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{74484209-3BC0-4AA1-B3E1-6A571B7692A5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PackageDelivery.Repository.Contracts</RootNamespace>
+    <AssemblyName>PackageDelivery.Repository.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DbModels\Core\DeliveryDbModel.cs" />
+    <Compile Include="DbModels\Core\DeliveryStatusDbModel.cs" />
+    <Compile Include="DbModels\Core\PackageHistoryDbModel.cs" />
+    <Compile Include="DbModels\Parameters\CityDbModel.cs" />
+    <Compile Include="DbModels\Parameters\DepartmentDbModel.cs" />
+    <Compile Include="DbModels\Parameters\AddressDbModel.cs" />
+    <Compile Include="DbModels\Parameters\DocumentTypeDbModel.cs" />
+    <Compile Include="DbModels\Parameters\OfficeDbModel.cs" />
+    <Compile Include="DbModels\Parameters\PackageDbModel.cs" />
+    <Compile Include="DbModels\Parameters\PersonDbModel.cs" />
+    <Compile Include="DbModels\Parameters\TransportTypeDbModel.cs" />
+    <Compile Include="DbModels\Parameters\VehicleDbModel.cs" />
+    <Compile Include="DbModels\Parameters\WarehouseDbModel.cs" />
+    <Compile Include="Interfaces\Core\IDeliveryRepository.cs" />
+    <Compile Include="Interfaces\Core\IDeliveryStatusRepository.cs" />
+    <Compile Include="Interfaces\Core\IPackageHistoryRepository.cs" />
+    <Compile Include="Interfaces\Parameters\IAddressRepository.cs" />
+    <Compile Include="Interfaces\Parameters\ICityRepository.cs" />
+    <Compile Include="Interfaces\Parameters\IDepartmentRepository.cs" />
+    <Compile Include="Interfaces\Parameters\IOfficeRepository.cs" />
+    <Compile Include="Interfaces\Parameters\IPackageRepository.cs" />
+    <Compile Include="Interfaces\Parameters\IVehicleRepository.cs" />
+    <Compile Include="Interfaces\Parameters\ITransportTypeRepository.cs" />
+    <Compile Include="Interfaces\Parameters\IDocumentTypeRepository.cs" />
+    <Compile Include="Interfaces\Parameters\IPersonRepository.cs" />
+    <Compile Include="Interfaces\Parameters\IWarehouseRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

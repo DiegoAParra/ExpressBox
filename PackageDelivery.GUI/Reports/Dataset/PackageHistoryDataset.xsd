@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PackageHistoryDataset" targetNamespace="http://tempuri.org/PackageHistoryDataset.xsd" xmlns:mstns="http://tempuri.org/PackageHistoryDataset.xsd" xmlns="http://tempuri.org/PackageHistoryDataset.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PackageHistoryDataset" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="PackageHistoryDataset" msprop:Generator_DataSetName="PackageHistoryDataset">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PackageHistory" msprop:Generator_RowEvHandlerName="PackageHistoryRowChangeEventHandler" msprop:Generator_RowDeletedName="PackageHistoryRowDeleted" msprop:Generator_RowDeletingName="PackageHistoryRowDeleting" msprop:Generator_RowEvArgName="PackageHistoryRowChangeEvent" msprop:Generator_TablePropName="PackageHistory" msprop:Generator_RowChangedName="PackageHistoryRowChanged" msprop:Generator_RowChangingName="PackageHistoryRowChanging" msprop:Generator_TableClassName="PackageHistoryDataTable" msprop:Generator_RowClassName="PackageHistoryRow" msprop:Generator_TableVarName="tablePackageHistory" msprop:Generator_UserTableName="PackageHistory">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_UserColumnName="Id" type="xs:string" minOccurs="0" />
+              <xs:element name="AdmissionDate" msprop:Generator_ColumnPropNameInRow="AdmissionDate" msprop:Generator_ColumnPropNameInTable="AdmissionDateColumn" msprop:Generator_ColumnVarNameInTable="columnAdmissionDate" msprop:Generator_UserColumnName="AdmissionDate" type="xs:string" minOccurs="0" />
+              <xs:element name="DepurateDate" msprop:Generator_ColumnPropNameInRow="DepurateDate" msprop:Generator_ColumnPropNameInTable="DepurateDateColumn" msprop:Generator_ColumnVarNameInTable="columnDepurateDate" msprop:Generator_UserColumnName="DepurateDate" type="xs:string" minOccurs="0" />
+              <xs:element name="Description" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_UserColumnName="Description" type="xs:string" minOccurs="0" />
+              <xs:element name="PackageName" msprop:Generator_ColumnPropNameInRow="PackageName" msprop:Generator_ColumnPropNameInTable="PackageNameColumn" msprop:Generator_ColumnVarNameInTable="columnPackageName" msprop:Generator_UserColumnName="PackageName" type="xs:string" minOccurs="0" />
+              <xs:element name="WarehouseName" msprop:Generator_ColumnPropNameInRow="WarehouseName" msprop:Generator_ColumnPropNameInTable="WarehouseNameColumn" msprop:Generator_ColumnVarNameInTable="columnWarehouseName" msprop:Generator_UserColumnName="WarehouseName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

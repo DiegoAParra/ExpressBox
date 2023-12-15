@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7143E459-CEE2-4B2D-8599-8E488FD69B4F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PackageDelivery.Repository.Implementation</RootNamespace>
+    <AssemblyName>PackageDelivery.Repository.Implementation</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataModel\Bodega.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Departamento.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Direccion.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Envio.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EstadoEnvio.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Historial.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Municipio.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Oficina.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PackageDeliveryDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PackageDeliveryDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PackageDeliveryDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PackageDeliveryDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PackageDeliveryDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Paquete.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Persona.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\TipoDocumento.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\TipoTransporte.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\vehiculo.cs">
+      <DependentUpon>PackageDeliveryDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\Core\PackageHistoryImpRepository.cs" />
+    <Compile Include="Implementation\Core\DeliveryImpRespository.cs" />
+    <Compile Include="Implementation\Core\DeliveryStatusImpRepository.cs" />
+    <Compile Include="Implementation\Parameters\AddressImpRepository.cs" />
+    <Compile Include="Implementation\Parameters\CityImpRepository.cs" />
+    <Compile Include="Implementation\Parameters\DepartmentImpRepository.cs" />
+    <Compile Include="Implementation\Parameters\OfficeImpRepository.cs" />
+    <Compile Include="Implementation\Parameters\PackageImpRepository.cs" />
+    <Compile Include="Implementation\Parameters\VehicleImpRepository.cs" />
+    <Compile Include="Implementation\Parameters\TransportTypeImpRepository.cs" />
+    <Compile Include="Implementation\Parameters\DocumentTypeImpRepository.cs" />
+    <Compile Include="Implementation\Parameters\PersonImpRepository.cs" />
+    <Compile Include="Implementation\Parameters\WarehouseImpRepository.cs" />
+    <Compile Include="Mappers\Core\DeliveryRepositoryMapper.cs" />
+    <Compile Include="Mappers\Core\DeliveryStatusRepositoryMapper.cs" />
+    <Compile Include="Mappers\Core\PackageHistoryRepositoryMapper.cs" />
+    <Compile Include="Mappers\DbModelMapperBase.cs" />
+    <Compile Include="Mappers\Parameters\AddressRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\CityRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\DepartmentRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\DocumentTypeRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\OfficeRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\PackageRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\PersonRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\TransportTypeRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\VehicleRepositoryMapper.cs" />
+    <Compile Include="Mappers\Parameters\WarehouseRepositoryMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="DataModel\PackageDeliveryDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PackageDeliveryDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataModel\PackageDeliveryDataModel.edmx.diagram">
+      <DependentUpon>PackageDeliveryDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PackageDelivery.Repository.Contracts\PackageDelivery.Repository.Contracts.csproj">
+      <Project>{74484209-3bc0-4aa1-b3e1-6a571b7692a5}</Project>
+      <Name>PackageDelivery.Repository.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataModel\PackageDeliveryDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PackageDeliveryDataModel.edmx</DependentUpon>
+      <LastGenOutput>PackageDeliveryDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\PackageDeliveryDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PackageDeliveryDataModel.edmx</DependentUpon>
+      <LastGenOutput>PackageDeliveryDataModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

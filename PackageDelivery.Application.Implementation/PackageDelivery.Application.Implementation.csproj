@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{67795755-BAFF-4A62-8974-0AD173F25E4A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PackageDelivery.Application.Implementation</RootNamespace>
+    <AssemblyName>PackageDelivery.Application.Implementation</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implementation\Core\DeliveryImpApplication.cs" />
+    <Compile Include="Implementation\Core\DeliveryStatusImpApplication.cs" />
+    <Compile Include="Implementation\Core\PackageHistoryImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\AddressImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\CityImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\DepartmentImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\OfficeImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\PackageImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\VehicleImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\TransportTypeImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\DocumentTypeImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\PersonImpApplication.cs" />
+    <Compile Include="Implementation\Parameters\WarehouseImpApplication.cs" />
+    <Compile Include="Mappers\Core\DeliveryApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\DeliveryStatusApplicationMapper.cs" />
+    <Compile Include="Mappers\Core\PackageHistoryApplicationMapper.cs" />
+    <Compile Include="Mappers\DTOMapperBase.cs" />
+    <Compile Include="Mappers\Parameters\AddressApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\OfficeApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\VehicleApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\CityApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\DepartmentApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\PackageApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\TransportTypeApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\WarehouseApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\DocumentTypeApplicationMapper.cs" />
+    <Compile Include="Mappers\Parameters\PersonApplicationMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PackageDelivery.Application.Contracts\PackageDelivery.Application.Contracts.csproj">
+      <Project>{1e748393-bc5b-4ab0-b2ad-d958f24fd745}</Project>
+      <Name>PackageDelivery.Application.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageDelivery.Repository.Contracts\PackageDelivery.Repository.Contracts.csproj">
+      <Project>{74484209-3bc0-4aa1-b3e1-6a571b7692a5}</Project>
+      <Name>PackageDelivery.Repository.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

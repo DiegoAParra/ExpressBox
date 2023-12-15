@@ -1,0 +1,121 @@
+﻿@model Tuple<IEnumerable<PackageDelivery.GUI.Models.Parameters.WarehouseModel>, IEnumerable<PackageDelivery.GUI.Models.Core.PackageHistoryModel>, PackageDelivery.GUI.Models.Core.PackageHistoryModel>
+
+@{
+    ViewBag.Title = "Rastrear";
+}
+
+<hr class="my-2"> <!-- Línea divisoria -->
+
+<div class="container mt-12 d-flex justify-content-center align-items-center">
+    <h4>Rastrea tu paquete</h4>
+    <form class="form-inline my-2 my-lg-0" onsubmit="return redirectToSearch()">
+        <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
+        <button type="submit" class="btn btn-info">Buscar</button>
+    </form>
+
+    <script>
+        function redirectToSearch() {
+            var searchValue = document.getElementById('searchInput').value;
+            window.location.href = '@Url.Action("Search", "Home")?id=' + searchValue;
+            return false; // Evita que el formulario se envíe normalmente
+        }
+    </script>
+</div>
+
+<hr class="my-2"> <!-- Línea divisoria -->
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item3.AdmissionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item3.DepurateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item3.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item3.Id_Package)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Item3.WarehouseName)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Item2)
+    {
+        if (item.Id_Package == Model.Item3.Id_Package)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdmissionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepurateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_Package)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WarehouseName)
+                </td>
+            </tr>
+        }
+
+    }
+</table>
+
+<div id="map"></div>
+
+<style>
+    #map {
+        height: 380px;
+    }
+</style>
+
+<script>
+    var map = L.map('map').setView([0, 0], 17);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+</script>
+
+@foreach (var item in Model.Item1)
+{
+    <script>
+        var marker = L.marker([@Html.DisplayFor(modelItem => item.Latitude), @Html.DisplayFor(modelItem => item.Longitude)]).addTo(map);
+        marker.bindPopup("<b>@Html.DisplayFor(modelItem => item.Name)</b><br>@Html.DisplayFor(modelItem => item.Direction)").openPopup();
+    </script>
+}
+
+@foreach (var item in Model.Item2)
+{
+    if (item.Id_Package == Model.Item3.Id_Package)
+    {
+        foreach (var itemW in Model.Item1)
+        {
+            if (item.Id_Warehouse == itemW.Id)
+            {
+                <script>
+                    var marker = L.marker([@Html.DisplayFor(modelItem => itemW.Latitude), @Html.DisplayFor(modelItem => itemW.Longitude)]).addTo(map);
+                    marker.bindPopup("<b>@Html.DisplayFor(modelItem => itemW.Name)</b><br>@Html.DisplayFor(modelItem => itemW.Direction)").openPopup();
+
+                    var circle = L.circle([@Html.DisplayFor(modelItem => itemW.Latitude), @Html.DisplayFor(modelItem => itemW.Longitude)], {
+                        color: 'blue',
+                        fillColor: 'blue',
+                        fillOpacity: 0.5,
+                        radius: 50
+                    }).addTo(map);
+
+                </script>
+            }
+        }
+    }
+}
+

@@ -1,0 +1,40 @@
+﻿@model PackageDelivery.GUI.Models.Parameters.VehicleModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Vehiculo</h2>
+
+<h3>Estas seguro de querer eliminar este vehiculo?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Plate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Plate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransportTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransportTypeName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default btn-danger" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

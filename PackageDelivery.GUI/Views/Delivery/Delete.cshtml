@@ -1,0 +1,80 @@
+﻿@model PackageDelivery.GUI.Models.Core.DeliveryModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Envio</h2>
+
+<h3>Esta seguro de querer eliminar este envio?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DestinationAddressName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DestinationAddressName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Package)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Package)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryStatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryStatusName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SenderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SenderName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransportTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransportTypeName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default btn-danger" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,26 @@
+﻿@model PackageDelivery.GUI.Models.Parameters.DepartmentModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles Departamento</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @Class = "btn btn-warning" }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

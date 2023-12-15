@@ -1,0 +1,82 @@
+﻿@model PackageDelivery.GUI.Models.Parameters.PersonModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles Persona</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherNames)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherNames)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdentificationNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdentificationNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CellPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CellPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocumentTypeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @Class = "btn btn-warning" }) |
+    @Html.ActionLink("Volver", "Index")
+</p>
