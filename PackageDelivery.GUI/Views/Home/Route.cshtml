@@ -5,7 +5,7 @@
 }
 
 <div class="text-center">
-    <h2>Consulta tu Ruta</h2>
+    <h2>Rutas de entrega</h2>
 </div>
 
 <hr class="my-2"> <!-- Línea divisoria -->
@@ -23,69 +23,52 @@
         </div>
     </div>
 
-    <div id="selectedWarehouseAndDateMessage" class="alert" style="display: none;">
-        <strong>Bodega:</strong> <span id="selectedWarehouse"></span><br />
-        <strong>Fecha Entrega:</strong> <span id="selectedDateText"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary ml-md-auto">Enviar</button>
+    <button type="submit" class="btn btn-info ml-md-auto">Consultar</button>
 </form>
 
 <hr class="my-2"> <!-- Línea divisoria -->
 
-@section scripts {
-    <script>
-        // Captura el evento de cambio del DropDownList
-        $(document).ready(function () {
-            $("#selectWarehouse, #selectedDate").change(function () {
-                // Obtiene el texto de la bodega seleccionada
-                var selectedWarehouse = $("#selectWarehouse").find("option:selected").text();
+@if (Model.Item2 != null && Model.Item2.Any())
+{
+    <div id="map"></div>
 
-                // Obtiene la fecha seleccionada
-                var selectedDate = $("#selectedDate").val();
+    <hr class="my-2"> <!-- Línea divisoria -->
 
-                // Muestra el mensaje con la bodega y la fecha seleccionados
-                $("#selectedWarehouse").text(selectedWarehouse);
-                $("#selectedDateText").text(selectedDate);
-                $("#selectedWarehouseAndDateMessage").show();
-            });
-
-            // Agrega un manejador de eventos al formulario para enviar los datos al controlador
-            $("#myForm").submit(function (event) { });
-        });
-    </script>
-}
-
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => Model.Item2.First().Id_Package)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => Model.Item2.First().Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => Model.Item2.First().DestinationAddress)
-        </th>
-    </tr>
-
-    @foreach (var item in Model.Item2)
-    {
+    <table class="table table-bordered table-striped">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id_Package)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DestinationAddress)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => Model.Item2.First().Id_Package)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.Item2.First().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.Item2.First().DestinationAddress)
+            </th>
         </tr>
-    }
-</table>
 
-<div id="map"></div>
+        @foreach (var item in Model.Item2)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_Package)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationAddress)
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        No hay rutas para mostrar
+    </div>
+}
 
 <style>
     #map {
@@ -94,12 +77,32 @@
 </style>
 
 <script>
+    // Inicializa el mapa
     var map = L.map('map').setView([0, 0], 14);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+
+    // Captura el evento de cambio del DropDownList
+    $(document).ready(function () {
+        $("#selectWarehouse, #selectedDate").change(function () {
+            // Obtiene el texto de la bodega seleccionada
+            var selectedWarehouse = $("#selectWarehouse").find("option:selected").text();
+
+            // Obtiene la fecha seleccionada
+            var selectedDate = $("#selectedDate").val();
+
+            // Muestra el mensaje con la bodega y la fecha seleccionados
+            $("#selectedWarehouse").text(selectedWarehouse);
+            $("#selectedDateText").text(selectedDate);
+            $("#selectedWarehouseAndDateMessage").show();
+        });
+
+        // Agrega un manejador de eventos al formulario para enviar los datos al controlador
+        $("#myForm").submit(function (event) { });
+    });
 </script>
 
 @{
@@ -107,6 +110,7 @@
 }
 
 <script>
+    //Geocodificación
     var claveAPI = 'AIzaSyBtsy4zQaQe8frwv0gZaqvG8AokhWYLERc';
     var coordenadas = [];
 
@@ -246,5 +250,3 @@
         })
         .catch(error => console.error(error));
 </script>
-
-

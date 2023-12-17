@@ -57,7 +57,11 @@ namespace PackageDelivery.GUI.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // Si ocurre un error, establece un mensaje en TempData
+                TempData["MensajeError"] = "Hubo un problema en la solicitud. Es posible que exista NO dicho paquete";
+
+                // Devuelve una redirección a la vista donde se mostrará el mensaje
+                return RedirectToAction("Index");
             }
             WarehouseGUIMapper mapperWarehouse = new WarehouseGUIMapper();
             IEnumerable<WarehouseModel> listWarehouse = mapperWarehouse.DTOToModelMapper(_appWarehouse.getRecordList(filter));
@@ -82,7 +86,11 @@ namespace PackageDelivery.GUI.Controllers
             }
             if (PackageHistoryModel == null)
             {
-                return HttpNotFound();
+                // Si ocurre un error, establece un mensaje en TempData
+                TempData["MensajeError"] = "Hubo un problema en la solicitud. Es posible que NO exista dicho paquete";
+
+                // Devuelve una redirección a la vista donde se mostrará el mensaje
+                return RedirectToAction("Index");
             }
 
             // Usar Tuple para combinar los modelos

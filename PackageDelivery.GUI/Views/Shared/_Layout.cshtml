@@ -13,6 +13,74 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
+    <style>
+        /* Ajuste la altura del carrusel según sus necesidades */
+        #expressBoxCarousel {
+            max-height: 400px; /* Establece una altura fija */
+            margin: 0 auto; /* Centra el carrusel horizontalmente */
+            overflow: hidden; /* Oculta el desbordamiento de imágenes */
+            position: relative; /* Permite posicionar el texto sobre la imagen */
+        }
+
+        /* Establece la altura de las imágenes dentro del carrusel */
+        #expressBoxCarousel img {
+            height: 100%; /* Ocupa el 100% de la altura del contenedor */
+            width: auto; /* Ajusta automáticamente el ancho según la altura */
+            object-fit: cover; /* Mantiene la relación de aspecto y cubre el contenedor */
+        }
+
+        /* Estilo para el texto superpuesto */
+        .carousel-caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-46%, -110%);
+            color: white;
+            text-align: center;
+        }
+
+        .info-box address .address-line {
+            margin-bottom: 5px;
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: none; /* Elimina el fondo del botón para que solo se muestre el icono */
+            border: none; /* Elimina el borde */
+        }
+
+        .whatsapp-button img {
+            width: 80px; /* Ajusta el ancho del icono según sea necesario */
+            height: auto; /* Mantiene la proporción del icono */
+            margin-right: 10px; /* Añade espacio entre el icono y el texto si decides agregarlo más adelante */
+        }
+
+        /* Estilo para ajustar la imagen a un tamaño específico y colocarla a la izquierda */
+        .section-image img {
+            width: 100%; /* Ajusta el ancho de la imagen según sea necesario */
+            height: auto; /* Mantiene la proporción de la imagen */
+            float: left; /* Coloca la imagen a la izquierda */
+            margin-right: 20px; /* Añade espacio entre la imagen y el texto */
+        }
+
+        /* Estilo para el texto y el botón a la derecha de la imagen */
+        .section-text {
+            overflow: hidden; /* Evita que el texto flote alrededor de la imagen */
+        }
+
+        .section-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
