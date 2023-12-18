@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PackageDelivery.GUI.Models.Core
 {
@@ -10,8 +11,12 @@ namespace PackageDelivery.GUI.Models.Core
     {
         public long Id { get; set; }
         [Required]
+
         [DisplayName("Fecha del Envío")]
+        [DataType(DataType.DateTime)]
+        [Column(TypeName = "datetime2")]
         public DateTime DeliveryDate { get; set; }
+
         [Required]
         [DisplayName("Precio")]
         public int Price { get; set; }

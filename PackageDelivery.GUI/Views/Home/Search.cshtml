@@ -41,6 +41,7 @@
         <th>
             @Html.DisplayNameFor(model => Model.Item3.WarehouseName)
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model.Item2)
@@ -63,9 +64,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.WarehouseName)
                 </td>
+                <td>
+                    @Html.ActionLink("Editar", "UpdateDeliveryDate", new { id = item.Id }, new { @Class = "btn btn-warning"})
+                </td>
             </tr>
         }
-
     }
 </table>
 

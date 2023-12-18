@@ -3,17 +3,24 @@ using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PackageDelivery.GUI.Models.Core
 {
     public class PackageHistoryModel
     {
         public long Id { get; set; }
+
         [Required]
         [DisplayName("Fecha de Admisión")]
+        [DataType(DataType.DateTime)]
+        [Column(TypeName = "datetime2")]
         public DateTime AdmissionDate { get; set; }
+
         [Required]
         [DisplayName("Fecha de Entrega")]
+        [DataType(DataType.DateTime)]
+        [Column(TypeName = "datetime2")]
         public DateTime DepurateDate { get; set; }
 
         [DisplayName("Descripción")]

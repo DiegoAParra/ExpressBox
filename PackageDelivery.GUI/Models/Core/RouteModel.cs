@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace PackageDelivery.GUI.Models.Core
 {
@@ -14,5 +17,10 @@ namespace PackageDelivery.GUI.Models.Core
 
         [DisplayName("Dirección")]
         public string DestinationAddress { get; set; }
+
+        [DisplayName("Hora Entrega")]
+        [DataType(DataType.DateTime)]
+        [Column(TypeName = "datetime2")]
+        public DateTime DepurateDate { get; set; }
     }
 }

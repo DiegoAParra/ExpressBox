@@ -1,5 +1,8 @@
-﻿using PackageDelivery.Application.Contracts.Interfaces.Core;
+﻿using PackageDelivery.Application.Contracts.DTO.Core;
+using PackageDelivery.Application.Contracts.DTO.Parameters;
+using PackageDelivery.Application.Contracts.Interfaces.Core;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
+using PackageDelivery.GUI.Helpers;
 using PackageDelivery.GUI.Mappers.Core;
 using PackageDelivery.GUI.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Core;
@@ -99,6 +102,43 @@ namespace PackageDelivery.GUI.Controllers
             return View(modelosCombinados);
         }
 
+        // GET: PackageHistory/Edit
+        public ActionResult UpdateDeliveryDate(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PackageHistoryGUIMapper mapper = new PackageHistoryGUIMapper();
+            PackageHistoryModel PackageHistoryModel = mapper.DTOToModelMapper(_appPackageHistory.getRecordById(id.Value));
+            if (PackageHistoryModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(PackageHistoryModel);
+        }
+
+        // POST: PackageHistory/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateDeliveryDate(PackageHistoryModel PackageHistoryModel)
+        {
+            if (ModelState.IsValid)
+            {
+                PackageHistoryGUIMapper mapper = new PackageHistoryGUIMapper();
+                PackageHistoryDTO response = _appPackageHistory.updateRecord(mapper.ModelToDTOMapper(PackageHistoryModel));
+                if (response != null)
+                {
+                    ViewBag.ClassName = ActionMessages.successClass;
+                    ViewBag.Message = ActionMessages.succesMessage;
+                    return RedirectToAction("Search", new { id = PackageHistoryModel.Id });
+                }
+            }
+            ViewBag.ClassName = ActionMessages.warningClass;
+            ViewBag.Message = ActionMessages.errorMessage;
+            return View(PackageHistoryModel);
+        }
+
         // GET: HomeController/Route
         public ActionResult Route()
         {
@@ -141,7 +181,7 @@ namespace PackageDelivery.GUI.Controllers
             {
                 if(item.Id_Warehouse == Convert.ToInt32(IdWarehouse))
                 {
-                    if(item.DepurateDate == selectedDate)
+                    if(item.DepurateDate.Date == selectedDate.Date)
                     {
                         foreach (var itemd in listDelivery)
                         {
@@ -163,7 +203,8 @@ namespace PackageDelivery.GUI.Controllers
                                                         {
                                                             Id_Package = item.Id_Package,
                                                             Description = item.Description,
-                                                            DestinationAddress = itema.StreetType + " Nro " + itema.Number + " Barrio " + itema.Neighborhood + " " + itemc.Name + ", " + itemad.Name
+                                                            DestinationAddress = itema.StreetType + " Nro " + itema.Number + " Barrio " + itema.Neighborhood + " " + itemc.Name + ", " + itemad.Name,
+                                                            DepurateDate = item.DepurateDate
                                                         };
 
                                                         List<RouteModel> listaModificable = listRoute.ToList();
