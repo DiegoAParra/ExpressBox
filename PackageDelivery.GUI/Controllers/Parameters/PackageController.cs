@@ -1,14 +1,11 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.Parameters;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
-using PackageDelivery.Application.Implementation.Implementation.Parameters;
 using PackageDelivery.GUI.Helpers;
-using PackageDelivery.GUI.Implementation.Mappers.Parameters;
+using PackageDelivery.GUI.Mappers.Parameters;
 using PackageDelivery.GUI.Models.Parameters;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
-using System;
-using PackageDelivery.GUI.Mappers.Parameters;
 
 namespace PackageDelivery.GUI.Controllers.Parameters
 {

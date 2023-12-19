@@ -1,5 +1,4 @@
 ﻿using PackageDelivery.Application.Contracts.DTO.Core;
-using PackageDelivery.Application.Contracts.DTO.Parameters;
 using PackageDelivery.Application.Contracts.Interfaces.Core;
 using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Helpers;
