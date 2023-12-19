@@ -2,6 +2,8 @@
 using Moq;
 using PackageDelivery.Application.Contracts.DTO.Core;
 using PackageDelivery.Application.Contracts.DTO.Parameters;
+using PackageDelivery.Application.Contracts.Interfaces.Core;
+using PackageDelivery.Application.Contracts.Interfaces.Parameters;
 using PackageDelivery.GUI.Controllers;
 using PackageDelivery.GUI.Models.Core;
 using PackageDelivery.GUI.Models.Parameters;
@@ -122,6 +124,68 @@ namespace PackageDelivery.Test.Controllers
                 Assert.AreEqual(tuplaResult.Item2.ToList()[i].DestinationAddress, listRoute.ToList()[i].DestinationAddress);
                 Assert.AreEqual(tuplaResult.Item2.ToList()[i].DepurateDate, listRoute.ToList()[i].DepurateDate);
             }
+        }
+
+        [TestMethod]
+        public void Search_ReturnsViewWithModel()
+        {
+            // Arrange
+            // Mock de las dependencias
+            var mockWarehouseApplication = new Mock<IWarehouseApplication>();
+            var mockPackageHistoryApplication = new Mock<IPackageHistoryApplication>();
+            var mockDeliveryApplication = new Mock<IDeliveryApplication>();
+            var mockAddressApplication = new Mock<IAddressApplication>();
+            var mockCityApplication = new Mock<ICityApplication>();
+            var mockDepartmentApplication = new Mock<IDepartmentApplication>();
+
+            // Setup mock data para WarehouseModel
+            var warehouseDTOs = new List<WarehouseDTO>
+            {
+                new WarehouseDTO { Id = 1, Name = "Warehouse 1", Direction = "Direccion 1", Code = "Code1", Latitude = "Lat1", Longitude = "Long1", Id_City = 1 },
+                new WarehouseDTO { Id = 2, Name = "Warehouse 2", Direction = "Direccion 2", Code = "Code2", Latitude = "Lat2", Longitude = "Long2", Id_City = 2 },
+                new WarehouseDTO { Id = 3, Name = "Warehouse 3", Direction = "Direccion 3", Code = "Code3", Latitude = "Lat3", Longitude = "Long3", Id_City = 3 }
+            };
+
+            // Setup mock data para PackageHistoryModel
+            var packageHistoryDTOs = new List<PackageHistoryDTO>
+            {
+                new PackageHistoryDTO { Id = 1, AdmissionDate = DateTime.Now, DepurateDate = DateTime.Now, Description = "Package 1", Id_Package = 1, Id_Warehouse = 1 },
+                new PackageHistoryDTO { Id = 2, AdmissionDate = DateTime.Now, DepurateDate = DateTime.Now, Description = "Package 2", Id_Package = 2, Id_Warehouse = 2 },
+                new PackageHistoryDTO { Id = 3, AdmissionDate = DateTime.Now, DepurateDate = DateTime.Now, Description = "Package 3", Id_Package = 3, Id_Warehouse = 3 }
+            };
+
+            // Setup mock behavior
+            mockWarehouseApplication.Setup(m => m.getRecordList(It.IsAny<string>())).Returns(warehouseDTOs);
+            mockPackageHistoryApplication.Setup(m => m.getRecordList(It.IsAny<string>())).Returns(packageHistoryDTOs);
+
+            // Crea una instancia del controlador con las dependencias mockeadas
+            var controller = new HomeController(
+                mockWarehouseApplication.Object,
+                mockPackageHistoryApplication.Object,
+                mockDeliveryApplication.Object,
+                mockAddressApplication.Object,
+                mockCityApplication.Object,
+                mockDepartmentApplication.Object
+            );
+
+            var idSelected = 2;
+
+            // Act
+            var result = controller.Search(idSelected);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+
+            var viewResult = (ViewResult)result;
+            Assert.IsInstanceOfType(viewResult.Model, typeof(Tuple<IEnumerable<WarehouseModel>, IEnumerable<PackageHistoryModel>, PackageHistoryModel>));
+
+            var model = (Tuple<IEnumerable<WarehouseModel>, IEnumerable<PackageHistoryModel>, PackageHistoryModel>)viewResult.Model;
+            Assert.IsNotNull(model.Item1);
+            Assert.IsNotNull(model.Item2);
+            Assert.IsNotNull(model.Item3);
+            Assert.AreEqual("Warehouse 2", model.Item3.WarehouseName);
+            Assert.AreEqual(idSelected, model.Item3.Id);
         }
     }
 }
